@@ -2,13 +2,15 @@ from datetime import datetime
 import gi
 import os.path
 import re
+import sys
 import urllib.request
 
 gi.require_version('Gtk', '3.0')
 
 from gi.repository import Gtk
 
-LOG = "iphelper.log"
+GLADE_FILE = os.path.join(sys.path[0], "iphelper.glade")
+LOG = os.path.join(sys.path[0], "iphelper.log")
 IP_SERVER = "https://ident.me"
 INTERNET_SERVER = "https://google.com"
 
@@ -19,7 +21,7 @@ ERROR = "#ff4040"
 class Main:
     def __init__(self):
         self.builder = Gtk.Builder()
-        self.builder.add_from_file("iphelper.glade")
+        self.builder.add_from_file(GLADE_FILE)
         self.builder.connect_signals({
             "gtk_main_quit": Gtk.main_quit,
             "on_button_refresh_clicked": self.load
@@ -64,11 +66,11 @@ class Main:
                     urllib.request.urlopen(INTERNET_SERVER, timeout=1)
                 except urllib.request.URLError as err:
                     self.label_ip_status.set_markup("<span weight=\"ultrabold\" color=\"{}\">No internet.</span>".format(ERROR))
-        
+
         if self.current_ip:
             with open(LOG, 'w') as f:
                 f.write(self.current_ip)
-        
+
         self.label_updated.set_markup("<span weight=\"ultrabold\">Last updated</span>\n{}".format(datetime.now().strftime("%d/%m/%Y %H:%M:%S")))
 
 if __name__ == '__main__':
