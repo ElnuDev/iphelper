@@ -47,3 +47,4 @@ The first time iphelper runs, or if `iphelper.log` has been deleted, "Previous I
 - Automatically run on boot
 - Windows support
 - Logo
+- Move to new domain: [iphelper.io](https://iphelper.io)
