@@ -11,7 +11,7 @@ from gi.repository import Gtk
 
 GLADE_FILE = os.path.join(sys.path[0], "iphelper.glade")
 LOG = os.path.join(sys.path[0], "iphelper.log")
-IP_SERVER = "https://ident.me"
+IP_SERVER = "https://v4.iphelper.io"
 INTERNET_SERVER = "https://google.com"
 
 OK = "#40c040"
